@@ -1,0 +1,5 @@
+pip install flask
+pip install python-dateutil
+pip install Flask-SQLAlchemy
+pip install Requests
+pip install mysql-connector-python

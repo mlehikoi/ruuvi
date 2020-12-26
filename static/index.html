@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <link rel="shortcut icon" href="/static/favicon.ico">
+    <link rel="stylesheet" href="ruuvi.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="ruuvi.js"></script>
+</head>
+
+<body>
+    <section class="container">
+        <div class="chart">
+            <canvas id="overlay" style="position:absolute;pointer-events:none;"></canvas>
+            <canvas id="chart1"></canvas>
+        </div>
+        <div id="gauge" class="gauge"></div>
+    </section>
+    <section class="container">
+        <div class="chart">
+            <canvas id="tempOverlay" style="position:absolute;pointer-events:none;"></canvas>
+            <canvas id="tempChart"></canvas>
+        </div>
+        <div id="tempGauge" class="gauge"></div>
+    </section>
+    <section class="container">
+        <div class="chart">
+            <canvas id="pressureOverlay" style="position:absolute;pointer-events:none;"></canvas>
+            <canvas id="pressureChart"></canvas>
+        </div>
+        <div id="pressureGauge" class="gauge"></div>
+    </section>
+
+    <script>
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+.body {
+    margin: 10px;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    justify-content: center;
+}
+
+.chart {
+    flex-grow: 2;
+    min-width: 350px;
+    min-height: 175px;
+    flex-basis: 350px;
+}
+
+.gauge {
+    min-width: 175px;
+    min-height: 175px;
+}
+@media screen and (max-width: 400px) {
+    .chart {
+        display: none;
+    }
+    /* .overlay {
+        display: none;
+    } */
+}
