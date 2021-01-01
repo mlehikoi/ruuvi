@@ -24,8 +24,6 @@ Register at pythonanywhere.com.
 ### Create a database
 After creating an account, go to ***Databases*** and select ***Initialize MySQL***. Write down the **password**, **username**, **database host address**
 
-python3 -m venv flask_app
-
 ### Create a web application
 Go to ***Web*** and click ***Add a new web app***.
 Select **Flask** as the framework and **Python 3.8** as the Python version.
@@ -33,8 +31,10 @@ Use the suggested name for your app: **/home/yourname/mysite/flask_app.py**.
 You can now test your web site by browsing to yourname.pythonanywhere.com.
 
 ### Install virtual environment for Python
-Python virtual environment make it possible to install different versions of python packages.
-For this project, it's required on pythonanywhere because we need to install newer version of  
+Python virtual environment makes it possible to install different versions of Python packages.
+For this project, it's required on pythonanywhere because we need to install newer version of dateutil.
+Go to ***Consoles*** and ***Start a new console: Bash***
+
 ```bash
 ~ $ cd  mysite/
 ~/mysite $ python3 -m venv venv
@@ -94,3 +94,17 @@ This means your phone is forwarding the data to the server.
 Let's check the data again: https://yourname.pythonanywhere.com/api/v1/ruuvi
 You should see data now!
 
+### Final step
+
+The app shows values of single tag.
+Name your tag in Ruuvi Station Android app.
+Change ruuvi.js to match your tag name:
+```bash
+(venv) 16:49 ~/mysite (master)$ vi static/ruuvi.js
+```
+Change this line to match your tag name:
+```JavaScript
+let url = '/api/v2/ruuvi?name=humidori';
+```
+
+Now you should be able to see your tag readings in https://yourname.pythonanywhere.com/
