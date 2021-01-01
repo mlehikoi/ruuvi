@@ -2,11 +2,8 @@ from dateutil.parser import isoparse
 from dateutil.tz import UTC
 from db.models import Reading, Name, Tag, init_db, db
 from flask import Flask
-import requests
 import sqlalchemy
 import sqlalchemy.exc
-
-
 def insert_name(name):
     name_id = db.session.query(Name.name_id).filter_by(name=name).scalar()
     if name_id:
@@ -60,27 +57,3 @@ def get_readings(begin=None, end=None, name=None, limit=None):
         q = q.limit(limit)
     #print(str(q))
     return q.all()
-
-
-def import_rows():
-    """ Import rows from legacy format """
-    r = requests.get('https://mlehikoi.pythonanywhere.com/api/v1/dump?limit=2000')
-    i = 0
-    for row in r.json():
-        try:
-            i += 1
-            print(i)
-            insert_reading(
-                mac=row['deviceId'],
-                name=row['name'],
-                updated_at=isoparse('%s+0200' % (row['time'],)).astimezone(UTC),
-                temperature=row['temperature'],
-                humidity=row['humidity'],
-                pressure=row['pressure'] / 100,
-                battery_level=row['batteryLevel'],
-                commit=True
-            )
-        except sqlalchemy.exc.IntegrityError:
-            db.session.rollback()
-            pass
-    db.session.commit()

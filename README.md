@@ -40,6 +40,8 @@ For this project, it's required on pythonanywhere because we need to install new
 ~/mysite $ python3 -m venv venv
 ~/mysite $ . venv/bin/activate
 (venv) ~/mysite $ pip install python-dateutil
+(venv) ~/mysite (master)$ pip install Flask-SQLAlchemy
+(venv) ~/mysite (master)$ pip install mysql-connector-python
 ```
 
 ### Configure your web app to use the virtual environment
@@ -71,13 +73,24 @@ hostname='ruuvi.mysql.pythonanywhere-services.com'
 databasename='ruuvi$default'
 ```
 ```bash
-(venv) 15:23 ~/mysite (master)$ pip install Flask-SQLAlchemy
-
-(venv) 15:44 ~/mysite (master)$ pip install mysql-connector-python
-
 (venv) 15:33 ~/mysite (master)$ python3 db_tool.py 
 Database initialized
 ```
 
+### Test the connection
 
+Go to https://yourname.pythonanywhere.com/api/v1/ruuvi
+
+Since there's no data available yet, the response will be `Too small range`.
+
+Configure your Android Ruuvi Station app to send the data to your server.
+In Ruuvi Station, go to ***App Settings*** and ***Gateway Settings***.
+Enter https://yourname.pythonanywhere.com/api/v1/ruuvi
+
+Click **TEST GATEWAY**
+The app should report `Gateway works! Response code 200`
+
+This means your phone is forwarding the data to the server.
+Let's check the data again: https://yourname.pythonanywhere.com/api/v1/ruuvi
+You should see data now!
 

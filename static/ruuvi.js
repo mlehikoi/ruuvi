@@ -29,7 +29,7 @@ function drawAll(readings)
 }
 
 async function fetchData(then1, begin, end) {
-    let url = '/api/v2/ruuvi?name=humidori';
+    let url = '/api/v1/ruuvi?name=humidori';
     if (begin != end) {
         url += '&begin=' + encodeURIComponent(begin) + '&end=' + encodeURIComponent(end);
     }

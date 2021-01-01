@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import timedelta
 from dateutil.parser import isoparse
 from dateutil.tz import UTC
 from db.models import init_db
@@ -6,10 +6,10 @@ from db.util import get_readings, insert_reading
 from flask import Flask, jsonify, request, redirect
 import json
 
-app = Flask(__name__, template_folder='/home/mlehikoi/mysite/templates')
+
+app = Flask(__name__)
 app.config['DEBUG'] = True
 init_db(app)
-
 
 
 @app.route('/')
@@ -71,7 +71,3 @@ def fetch_readings():
                 'batteryLevel': reading.battery_level
             })
     return jsonify(response)
-
-
-if __name__ == "__main__":
-    pass
