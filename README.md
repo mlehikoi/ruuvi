@@ -96,15 +96,9 @@ You should see data now!
 
 ### Final step
 
-The app shows values of single tag.
+The app shows values of single tag at a time.
 Name your tag in Ruuvi Station Android app.
-Change ruuvi.js to match your tag name:
-```bash
-(venv) 16:49 ~/mysite (master)$ vi static/ruuvi.js
-```
-Change this line to match your tag name:
-```JavaScript
-let url = '/api/v1/ruuvi?name=humidori';
-```
+Go to according URL that matches your tag.
+E.g., https://yourname.pythonanywhere.com/?name=humidori
 
-Now you should be able to see your tag readings in https://yourname.pythonanywhere.com/
+Now you should be able to see graphs or your tag readings.
