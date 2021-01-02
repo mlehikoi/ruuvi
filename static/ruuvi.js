@@ -6,6 +6,13 @@ let state = {
     }
 };
 
+const tagName = function() {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const tmp = urlParams.get('name');
+    return tmp ? tmp : 'humi';
+}();
+
 google.charts.load('current', { 'packages': ['gauge'] });
 google.charts.setOnLoadCallback(drawGraphs);
 
@@ -29,7 +36,7 @@ function drawAll(readings)
 }
 
 async function fetchData(then1, begin, end) {
-    let url = '/api/v1/ruuvi?name=humidori';
+    let url = '/api/v1/ruuvi?name=' + tagName;
     if (begin != end) {
         url += '&begin=' + encodeURIComponent(begin) + '&end=' + encodeURIComponent(end);
     }

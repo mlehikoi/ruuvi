@@ -14,7 +14,7 @@ init_db(app)
 
 @app.route('/')
 def get_main_page():
-    return redirect('/static/index.html')
+    return redirect(b'/static/index.html?' + request.query_string)
 
 
 @app.route('/api/v1/ruuvi', methods=['POST'])
