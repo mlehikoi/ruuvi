@@ -104,7 +104,7 @@ Change ruuvi.js to match your tag name:
 ```
 Change this line to match your tag name:
 ```JavaScript
-let url = '/api/v2/ruuvi?name=humidori';
+let url = '/api/v1/ruuvi?name=humidori';
 ```
 
 Now you should be able to see your tag readings in https://yourname.pythonanywhere.com/
