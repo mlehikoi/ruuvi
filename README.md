@@ -83,6 +83,16 @@ Go to https://yourname.pythonanywhere.com/api/v1/ruuvi
 
 Since there's no data available yet, the response will be `Too small range`.
 
+If there's some other error code, you may need to reload the web app. You can do that in bash:
+```bash
+(venv) 13:47 ~$ touch /var/www/ruuvi_pythonanywhere_com_wsgi.py
+(venv) 13:47 ~$ ls -l /var/www/ruuvi_pythonanywhere_com_wsgi.py
+-rw-rw-r-- 1 ruuvi registered_users 573 Jan  2 13:47 /var/www/ruuvi_pythonanywhere_com_wsgi.py
+```
+The latter command is not required.
+It just verifies the file's timestamp was truly updated.
+Alternative way to reload the web app is to go to ***Web*** and click **Reload yourname&#46;pythonanywhere&#46;com**.
+
 Configure your Android Ruuvi Station app to send the data to your server.
 In Ruuvi Station, go to ***App Settings*** and ***Gateway Settings***.
 Enter https://yourname.pythonanywhere.com/api/v1/ruuvi
