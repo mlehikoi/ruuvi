@@ -1,10 +1,11 @@
-from datetime import timedelta
+from datetime import timedelta, datetime
 from dateutil.parser import isoparse
 from dateutil.tz import UTC
 from db.models import init_db
 from db.util import get_readings, insert_reading
 from flask import Flask, jsonify, request, redirect
 import json
+import time
 
 
 app = Flask(__name__)
@@ -46,6 +47,8 @@ def fetch_readings():
         begin = isoparse(request.args.get('begin'))
         end = isoparse(request.args.get('end'))
     except:
+        end = datetime.now()
+        begin = end - timedelta(days=14)
         pass
 
     readings = get_readings(name=name, begin=begin, end=end)
@@ -71,3 +74,14 @@ def fetch_readings():
                 'batteryLevel': reading.battery_level
             })
     return jsonify(response)
+
+if __name__ == "__main__":
+    name = 'Humi'
+    begin = None
+    end = None
+    t0 = time.time()
+    readings = get_readings(name=name, begin=begin, end=end)
+    t1 = time.time()
+    print(len(readings))
+    print(t1 - t0)
+
