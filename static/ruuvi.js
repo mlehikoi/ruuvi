@@ -2,6 +2,7 @@ let state = {
     graph: {
         humidity: {},
         temperature: {},
+        dewPoint: {},
         pressure: {}
     }
 };
@@ -25,14 +26,30 @@ function isMobile()
 
 function drawAll(readings)
 {
+    // Calculate dew point
+    for (r of readings) {
+        r.dewPoint = calcDewPoint(r.temperature, r.humidity)
+    }
     drawChart('humidity', 'chart1', 'overlay', readings, 'Humidity %');
     drawGauge(readings);
     
     drawChart('temperature', 'tempChart', 'tempOverlay', readings, 'Temperature °C');
     drawTempGauge(readings);
 
+    drawChart('dewPoint', 'dewPointChart', 'dewPointOverlay', readings, 'Dew point C');
+    drawDewPointGauge(readings);
+
     drawChart('pressure', 'pressureChart', 'pressureOverlay', readings, 'Pressure hPa');
     drawPressureGauge(readings);
+}
+
+function calcDewPoint(t, rh) {
+    // Using NOAA values: a = 6.112 mbar, b = 17.67, c = 243.5 °C.
+    const a = 6.112;
+    const b = 17.67;
+    const c = 243.5;
+    yTRH = Math.log(rh / 100) + (b * t) / (c + t);
+    return c * yTRH / (b - yTRH)
 }
 
 async function fetchData(then1, begin, end) {
@@ -234,6 +251,25 @@ function drawTempGauge(readings) {
     };
 
     var chart = new google.visualization.Gauge(document.getElementById('tempGauge'));
+    chart.draw(data, options);
+}
+
+function drawDewPointGauge(readings) {
+    var data = google.visualization.arrayToDataTable([
+        ['Label', 'Value'],
+        ['Dew point', readings[0]['dewPoint']]
+    ]);
+
+    var options = {
+        min: -10, max: 50,
+        redFrom: 22, redTo: 30,
+        yellowFrom: 0, yellowTo: 18,
+        greenFrom: 18, greenTo: 22,
+        majorTicks: ['-10', '0', '10', '20', '30', '40', '50'],
+        minorTicks: 10
+    };
+
+    var chart = new google.visualization.Gauge(document.getElementById('dewPointGauge'));
     chart.draw(data, options);
 }
 
